@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div>
-        <h1>Last pressed key: {currentKeyCode}</h1>
-        <h1>Last pressed key code: {currentKeyName}</h1>
+        <h1>Last pressed key code: {currentKeyCode}</h1>
+        <h1>Last pressed key name: {currentKeyName}</h1>
         <h6>History of pressed keys: {keyCodeHistory.map(item => item + ", ")}</h6>
     </div>
   );
