@@ -1,4 +1,4 @@
-# react-keyboard-input-hook
+# react-keyboard-input-hook [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with keyboard inputs.
 
 ## Install
@@ -7,7 +7,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ## Usage
 
-```
+```jsx
 import React from "react";
 import useKeyUp from "./useKeyboardInput";
 
