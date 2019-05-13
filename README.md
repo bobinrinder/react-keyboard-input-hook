@@ -13,7 +13,7 @@ import useKeyUp from "./useKeyboardInput";
 
 function App() {
   const handleKeyUp = keyName => {
-    console.log('the ' + keyName + ' was just pressed!);
+    console.log('the ' + keyName + ' was just pressed!');
   };
 
   const { currentKeyName, currentKeyCode, keyCodeHistory } = useKeyUp(
