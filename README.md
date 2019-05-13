@@ -9,7 +9,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ```jsx
 import React from "react";
-import useKeyUp from "react-keyboard-input-hook";
+import { useKeyUp } from "react-keyboard-input-hook";
 
 function App() {
   // wrapping in useCallback is usually recommended
