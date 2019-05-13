@@ -44,6 +44,7 @@
     this.startHeldDown = {};
     this.intervalIndex = 0;
     this.currentKey = 0;
+    this.currentCode = "";
     this.scrollTimerId = 0;
     this.suspended = false;
     this.buttonIntervals = this.BUTTON_INTERVALS;
@@ -55,6 +56,7 @@
      */
     this.reset = function() {
       this.currentKey = 0;
+      this.currentCode = "";
       if (this.scrollTimerId) {
         window.clearTimeout(this.scrollTimerId);
         this.scrollTimerId = 0;
@@ -96,6 +98,7 @@
     // browser integration, de-bounce and de-duplicate key events, only allow one button at a time to be handled
     this.handleKeyDown = function(e) {
       var keyCode = e.keyCode;
+      var code = e.code;
       if (!this.suspended) {
         // && this.KEYCODES.indexOf(keyCode) >= 0
         e.preventDefault();
@@ -104,12 +107,13 @@
           this.startHeldDown[keyCode] = e.timeStamp;
           if (!this.currentKey) {
             this.currentKey = keyCode;
+            this.currentCode = code;
             this.scrollTimerId = window.setTimeout(
               this.doRepeat,
               this.getButtonInterval(true)
             );
             var event = new CustomEvent("keyDown", {
-              detail: { type: "buttonpress", keyCode: keyCode, code: e.code }
+              detail: { type: "buttonpress", keyCode: keyCode, code: code }
             });
             window.dispatchEvent(event);
             //this.trigger('buttonpress', {type: 'buttonpress', keyCode: keyCode});
@@ -120,6 +124,7 @@
 
     this.handleKeyUp = function(e) {
       var keyCode = e.keyCode;
+      var code = e.code;
       if (!this.suspended) {
         // && this.KEYCODES.indexOf(keyCode) >= 0
         e.preventDefault();
@@ -130,12 +135,13 @@
           // only emit release if this handler also got press
           if (this.currentKey === keyCode) {
             this.currentKey = 0;
+            this.currentCode = "";
             if (this.scrollTimerId) {
               window.clearTimeout(this.scrollTimerId);
               this.scrollTimerId = 0;
             }
             var event = new CustomEvent("keyUp", {
-              detail: { type: "buttonrelease", keyCode: keyCode, code: e.code }
+              detail: { type: "buttonrelease", keyCode: keyCode, code: code }
             });
             window.dispatchEvent(event);
             //this.trigger('buttonrelease', {type: 'buttonrelease', keyCode: keyCode});
@@ -154,8 +160,12 @@
           this.doRepeat,
           this.getButtonInterval()
         );
-        var event = new CustomEvent("keyDownRepeat", {
-          detail: { type: "buttonrepeat", keyCode: this.currentKey }
+        var event = new CustomEvent("keyRepeat", {
+          detail: {
+            type: "buttonrepeat",
+            keyCode: this.currentKey,
+            code: this.currentCode
+          }
         });
         window.dispatchEvent(event);
         // this.trigger("buttonrepeat", {

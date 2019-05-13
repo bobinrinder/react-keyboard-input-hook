@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import "./Buttons.js";
 
-export default function useKeyUp(handleKeyUpCallback = null) {
+export default function useKey(handleKeyCallback = null, type = "Up") {
+  // ensure valid event type
+  if (type !== "Up" && type !== "Down" && type !== "Repeat") {
+    type = "Up";
+  }
+  // init state
   const [state, setState] = useState({
     keyCode: null,
     keyCodeHistory: [],
@@ -10,7 +15,7 @@ export default function useKeyUp(handleKeyUpCallback = null) {
   });
 
   useEffect(() => {
-    const handleKeyUp = e => {
+    const handleKey = e => {
       // get key details from event
       const keyCode = e.detail.keyCode;
       const code = e.detail.code || "UnknownKey";
@@ -26,8 +31,8 @@ export default function useKeyUp(handleKeyUpCallback = null) {
       });
 
       // handle callback (if exists)
-      if (handleKeyUpCallback && typeof handleKeyUpCallback == "function") {
-        handleKeyUpCallback({
+      if (handleKeyCallback && typeof handleKeyCallback == "function") {
+        handleKeyCallback({
           keyName: code,
           keyCode
         });
@@ -35,10 +40,10 @@ export default function useKeyUp(handleKeyUpCallback = null) {
     };
 
     // register event listener
-    window.addEventListener("keyUp", handleKeyUp);
+    window.addEventListener("key" + type, handleKey);
     // cleanup event listener
-    return () => window.removeEventListener("keyUp", handleKeyUp);
-  }, [handleKeyUpCallback]);
+    return () => window.removeEventListener("key" + type, handleKey);
+  }, [handleKeyCallback, type]);
 
   return {
     keyCode: state.keyCode,
@@ -46,4 +51,16 @@ export default function useKeyUp(handleKeyUpCallback = null) {
     keyName: state.code,
     codeHistory: state.codeHistory
   };
+}
+
+export function useKeyUp(handleKeyUpCallback = null) {
+  return useKey(handleKeyUpCallback, "Up");
+}
+
+export function useKeyDown(handleKeyDownCallback = null) {
+  return useKey(handleKeyDownCallback, "Down");
+}
+
+export function useKeyRepeat(handleKeyRepeatCallback = null) {
+  return useKey(handleKeyRepeatCallback, "Repeat");
 }
