@@ -9,7 +9,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ```jsx
 import React from "react";
-import useKeyUp from "./useKeyboardInput";
+import useKeyUp from "react-keyboard-input-hook";
 
 function App() {
   const handleKeyUp = keyName => {
@@ -21,10 +21,10 @@ function App() {
   );
 
   return (
-    <div className="App">
-        <h1>{currentKeyCode}</h1>
-        <h1>{currentKeyName}</h1>
-        <h6>{keyCodeHistory.map(item => item + ", ")}</h6>
+    <div>
+        <h1>Last pressed key: {currentKeyCode}</h1>
+        <h1>Last pressed key code: {currentKeyName}</h1>
+        <h6>History of pressed keys: {keyCodeHistory.map(item => item + ", ")}</h6>
     </div>
   );
 }
