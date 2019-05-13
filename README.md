@@ -12,18 +12,18 @@ import React from "react";
 import useKeyUp from "react-keyboard-input-hook";
 
 function App() {
-  const handleKeyUp = keyName => {
+  // wrapping in useCallback is usually recommended
+  const handleKeyUp = ({ keyName }) => {
     console.log('the ' + keyName + ' was just pressed!');
   };
 
-  const { currentKeyName, currentKeyCode, keyCodeHistory } = useKeyUp(
-    handleKeyUp
-  );
+  // only destructure what you need, callback is optional
+  const { keyName, keyCode, keyCodeHistory } = useKeyUp(handleKeyUp);
 
   return (
     <div>
-        <h1>Last pressed key code: {currentKeyCode}</h1>
-        <h1>Last pressed key name: {currentKeyName}</h1>
+        <h1>Last pressed key code: {keyCode}</h1>
+        <h1>Last pressed key name: {keyName}</h1>
         <h6>History of pressed keys: {keyCodeHistory.map(item => item + ", ")}</h6>
     </div>
   );

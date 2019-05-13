@@ -14,6 +14,7 @@ export default function useKeyUp(handleKeyUpCallback = null) {
       // get key details from event
       const keyCode = e.detail.keyCode;
       const code = e.detail.code || "UnknownKey";
+
       // update state with new key details
       setState(prevState => {
         return {
@@ -40,9 +41,9 @@ export default function useKeyUp(handleKeyUpCallback = null) {
   }, [handleKeyUpCallback]);
 
   return {
-    currentKeyCode: state.keyCode,
+    keyCode: state.keyCode,
     keyCodeHistory: state.keyCodeHistory,
-    currentKeyName: state.code,
+    keyName: state.code,
     codeHistory: state.codeHistory
   };
 }
