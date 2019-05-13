@@ -3,7 +3,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ## Install
 
-`yarn add bobinrinder/react-keyboard-input-hook`
+`yarn add react-keyboard-input-hook`
 
 ## Usage
 
