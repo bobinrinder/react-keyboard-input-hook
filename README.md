@@ -42,7 +42,15 @@ export default App;
 ### useKeyUp
 #### Parameters: 
 - **callback** (optional, default `null`):
-Callback function that gets executed on every event.
+Callback function that gets executed on every event. 
+Callback argument object:
+```js
+{ 
+  keyName,   // string of pressed key
+  keyCode,   // integer of pressed keyCode
+  e          // event e.g. for e.PreventDefault()
+}
+```
 - **whitelist** (optional, default `[]`):
 Whitelist of keyboard keyCodes (integer array) that are relevant, all other keys will be ignored.
 Note: Can only be used if `blacklist` paramater is an empty array.
@@ -53,10 +61,10 @@ Note: Can only be used if `whitelist` paramater is an empty array.
 #### Return Object: 
 ```jsx
 { 
-  keyCode, // integer of last pressed keyCode
-  keyCodeHistory, // array of integers of recently pressed keyCodes
-  keyName, // string of last pressed key
-  keyNameHistory // array of strings of recently pressed keys
+  keyCode,          // integer of last pressed keyCode
+  keyCodeHistory,   // array of integers of recently pressed keyCodes
+  keyName,          // string of last pressed key
+  keyNameHistory    // array of strings of recently pressed keys
 }
 ```
 
