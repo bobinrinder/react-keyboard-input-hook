@@ -9,7 +9,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ```jsx
 import React from "react";
-import { useKeyUp, useKeyDown, useKeyRepeat } from "react-keyboard-input-hook";
+import { useKeyUp, useKeyDown } from "react-keyboard-input-hook";
 
 function App() {
   // wrapping in useCallback is usually recommended
@@ -19,15 +19,11 @@ function App() {
   const handleKeyDown = ({ keyName }) => {
     console.log('the ' + keyName + ' was just pressed down!');
   };
-  const handleKeyRepeat = ({ keyName }) => {
-    console.log('the ' + keyName + ' was just pressed down and held!');
-  };
 
   // only destructure what you need, callback is optional
   const { keyCode, keyCodeHistory, keyName, keyNameHistory } = useKeyUp();
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDown);
-  useKeyRepeat(handleKeyRepeat);
 
   return (
     <div>
@@ -64,11 +60,11 @@ Note: Can only be used if `whitelist` paramater is an empty array.
 }
 ```
 
-### useKeyDown
-Same as `useKeyUp`
+### useFireTvKeyUp
+Same as `useKeyUp` but with `whitelist` parameter defaulting to Fire TV key codes only (8, 13, 37, 38, 39, 40, 179, 227, 228).
 
-### useKeyRepeat
-Same as `useKeyUp`
+### useFireTvKeyRepeat
+Same as `useKeyUp` but with `whitelist` parameter defaulting to Fire TV key codes only (8, 13, 37, 38, 39, 40, 179, 227, 228).
 
 ## License
 MIT
