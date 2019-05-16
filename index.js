@@ -119,13 +119,13 @@ export function useFireTvKeyDown(
   return useKey(handleKeyCallback, "keydown", whitelist, blacklist);
 }
 
-export function useKeyCombo(keyCombos = [], handleKeyCallback = null) {
+export function useKeyCombo(keyCodes = [], handleKeyCallback = null) {
   const [currentlyPressedKeyCodes, setCurrentlyPressedKeyCodes] = useState([]);
 
   const handleKeyDown = ({ keyCode, keyName, e }) => {
     if (currentlyPressedKeyCodes.indexOf(keyCode) === -1) {
       if (
-        checkIfArrayItemsinArray(keyCombos, [
+        checkIfArrayItemsinArray(keyCodes, [
           ...currentlyPressedKeyCodes,
           keyCode
         ])
@@ -147,10 +147,10 @@ export function useKeyCombo(keyCombos = [], handleKeyCallback = null) {
     }
   };
 
-  useKeyDown(handleKeyDown, keyCombos);
-  useKeyUp(handleKeyUp, keyCombos);
+  useKeyDown(handleKeyDown, keyCodes);
+  useKeyUp(handleKeyUp, keyCodes);
 
-  if (!keyCombos || keyCombos.length < 2 || !handleKeyCallback) {
+  if (!keyCodes || keyCodes.length < 2 || !handleKeyCallback) {
     console.warn("Invalid arguments for usekeyCombo");
   }
 }

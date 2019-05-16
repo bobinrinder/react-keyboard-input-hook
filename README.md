@@ -1,5 +1,9 @@
 # react-keyboard-input-hook [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with keyboard inputs.
+A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with keyboard inputs. This library was originally built for controlling input from a Fire TV remote but it is now flexible for any keyboard input that works with key codes.
+
+## Demo
+
+An example and quick start is at [https://github.com/bobinrinder/react-fire-tv-web-app-example](https://github.com/bobinrinder/react-fire-tv-web-app-example)
 
 ## Install
 
@@ -77,15 +81,15 @@ Same as `useKeyUp`.
 
 ### useKeyCombo
 #### Parameters: 
-- **keyCombos** (required):
+- **keyCodes** (required):
 Array of at least 2 integer key codes that make up the key down combination.
 - **callback** (required):
 Callback function that gets executed once for each combo. 
 Callback argument object:
 ```js
 { 
-  keyName,   // string of pressed key
-  keyCode,   // integer of pressed keyCode
+  keyName,   // string of last pressed key of combo
+  keyCode,   // integer of last pressed keyCode of combo
   e          // event e.g. for e.PreventDefault()
 }
 ```
@@ -93,7 +97,7 @@ Callback argument object:
 ### useFireTvKeyUp
 Same as `useKeyUp` but with `whitelist` parameter defaulting to Fire TV key codes only (8, 13, 37, 38, 39, 40, 179, 227, 228).
 
-### useFireTvKeyRepeat
+### useFireTvKeyDown
 Same as `useKeyUp` but with `whitelist` parameter defaulting to Fire TV key codes only (8, 13, 37, 38, 39, 40, 179, 227, 228).
 
 ## License
