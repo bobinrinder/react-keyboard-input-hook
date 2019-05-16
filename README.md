@@ -9,7 +9,7 @@ A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with ke
 
 ```jsx
 import React from "react";
-import { useKeyUp, useKeyDown } from "react-keyboard-input-hook";
+import { useKeyUp, useKeyDown, useKeyCombo } from "react-keyboard-input-hook";
 
 function App() {
   // wrapping in useCallback is usually recommended
@@ -19,11 +19,15 @@ function App() {
   const handleKeyDown = ({ keyName }) => {
     console.log('the ' + keyName + ' was just pressed down!');
   };
+  const handleKeyCombo = () => {
+    console.log('a combo of up and down arrow was just pressed!');
+  };
 
   // only destructure what you need, callback is optional
   const { keyCode, keyCodeHistory, keyName, keyNameHistory } = useKeyUp();
   useKeyUp(handleKeyUp);
   useKeyDown(handleKeyDown);
+  useKeyCombo([38, 40], handleKeyCombo);
 
   return (
     <div>
@@ -65,6 +69,24 @@ Note: Can only be used if `whitelist` paramater is an empty array.
   keyCodeHistory,   // array of integers of recently pressed keyCodes
   keyName,          // string of last pressed key
   keyNameHistory    // array of strings of recently pressed keys
+}
+```
+
+### useKeyDown
+Same as `useKeyUp`.
+
+### useKeyCombo
+#### Parameters: 
+- **keyCombos** (required):
+Array of at least 2 integer key codes that make up the key down combination.
+- **callback** (required):
+Callback function that gets executed once for each combo. 
+Callback argument object:
+```js
+{ 
+  keyName,   // string of pressed key
+  keyCode,   // integer of pressed keyCode
+  e          // event e.g. for e.PreventDefault()
 }
 ```
 

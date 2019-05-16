@@ -88,33 +88,81 @@ export default function useKey(
 }
 
 export function useKeyUp(
-  handleKeyUpCallback = null,
+  handleKeyCallback = null,
   whitelist = [],
   blacklist = []
 ) {
-  return useKey(handleKeyUpCallback, "keyup", whitelist, blacklist);
+  return useKey(handleKeyCallback, "keyup", whitelist, blacklist);
 }
 
 export function useKeyDown(
-  handleKeyDownCallback = null,
+  handleKeyCallback = null,
   whitelist = [],
   blacklist = []
 ) {
-  return useKey(handleKeyDownCallback, "keydown", whitelist, blacklist);
+  return useKey(handleKeyCallback, "keydown", whitelist, blacklist);
 }
 
 export function useFireTvKeyUp(
-  handleKeyDownCallback = null,
+  handleKeyCallback = null,
   whitelist = FIRE_TV_KEY_CODES,
   blacklist = []
 ) {
-  return useKey(handleKeyDownCallback, "keyup", whitelist, blacklist);
+  return useKey(handleKeyCallback, "keyup", whitelist, blacklist);
 }
 
 export function useFireTvKeyDown(
-  handleKeyDownCallback = null,
+  handleKeyCallback = null,
   whitelist = FIRE_TV_KEY_CODES,
   blacklist = []
 ) {
-  return useKey(handleKeyDownCallback, "keydown", whitelist, blacklist);
+  return useKey(handleKeyCallback, "keydown", whitelist, blacklist);
+}
+
+export function useKeyCombo(keyCombos = [], handleKeyCallback = null) {
+  const [currentlyPressedKeyCodes, setCurrentlyPressedKeyCodes] = useState([]);
+
+  const handleKeyDown = ({ keyCode, keyName, e }) => {
+    if (currentlyPressedKeyCodes.indexOf(keyCode) === -1) {
+      if (
+        checkIfArrayItemsinArray(keyCombos, [
+          ...currentlyPressedKeyCodes,
+          keyCode
+        ])
+      ) {
+        handleKeyCallback({ keyCode, keyName, e });
+        setCurrentlyPressedKeyCodes([]);
+      } else {
+        setCurrentlyPressedKeyCodes(prevState => [...prevState, keyCode]);
+      }
+    }
+  };
+  const handleKeyUp = ({ keyCode }) => {
+    const indexOfPressedKeyCode = currentlyPressedKeyCodes.indexOf(keyCode);
+    if (indexOfPressedKeyCode > -1) {
+      setCurrentlyPressedKeyCodes(prevState => [
+        ...prevState.slice(0, indexOfPressedKeyCode),
+        ...prevState.slice(indexOfPressedKeyCode + 1)
+      ]);
+    }
+  };
+
+  useKeyDown(handleKeyDown, keyCombos);
+  useKeyUp(handleKeyUp, keyCombos);
+
+  if (!keyCombos || keyCombos.length < 2 || !handleKeyCallback) {
+    console.warn("Invalid arguments for usekeyCombo");
+  }
+}
+
+function checkIfArrayItemsinArray(arrayItems, array) {
+  if (array.length === 0 || arrayItems.length === 0) {
+    return false;
+  }
+  for (let i = 0; i < arrayItems.length; i++) {
+    if (array.indexOf(arrayItems[i]) === -1) {
+      return false;
+    }
+  }
+  return true;
 }
