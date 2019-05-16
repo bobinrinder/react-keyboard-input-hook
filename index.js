@@ -83,7 +83,7 @@ export default function useKey(
     keyCode: state.keyCode,
     keyCodeHistory: state.keyCodeHistory,
     keyName: state.code,
-    codeHistory: state.codeHistory
+    keyNameHistory: state.codeHistory
   };
 }
 
