@@ -1,4 +1,4 @@
-# react-keyboard-input-hook [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+# react-keyboard-input-hook [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![Build Status](https://travis-ci.org/bobinrinder/react-keyboard-input-hook.svg?branch=master)](https://travis-ci.org/bobinrinder/react-keyboard-input-hook)
 A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with keyboard inputs. This library was originally built for controlling input from a Fire TV remote but it is now flexible for any keyboard input that works with key codes.
 
 ## Demo
