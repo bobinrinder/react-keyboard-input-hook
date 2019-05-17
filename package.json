@@ -1,6 +1,6 @@
 {
   "name": "react-keyboard-input-hook",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A React hook to work with keyboard input.",
   "main": "index.js",
   "scripts": {
