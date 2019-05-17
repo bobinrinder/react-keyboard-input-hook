@@ -11,7 +11,7 @@ export default function useKey(
   // ensure valid event keyEvent
   if (keyEvent !== "keyup" && keyEvent !== "keydown") {
     console.warn(
-      "useKey keyEvent invalid, assumed keyEvent 'keydown' as fallback."
+      "useKey keyEvent invalid, assumed keyEvent 'keydown' as fallback!"
     );
     keyEvent = "keydown";
   }
@@ -151,11 +151,11 @@ export function useKeyCombo(keyCodes = [], handleKeyCallback = null) {
   useKeyUp(handleKeyUp, keyCodes);
 
   if (!keyCodes || keyCodes.length < 2 || !handleKeyCallback) {
-    console.warn("Invalid arguments for usekeyCombo");
+    console.warn("Invalid arguments for usekeyCombo!");
   }
 }
 
-function checkIfArrayItemsinArray(arrayItems, array) {
+export function checkIfArrayItemsinArray(arrayItems, array) {
   if (array.length === 0 || arrayItems.length === 0) {
     return false;
   }
