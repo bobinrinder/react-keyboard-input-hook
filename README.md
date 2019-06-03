@@ -2,6 +2,8 @@
 
 A [React Hook](https://reactjs.org/docs/hooks-intro.html) to easily work with keyboard inputs. This library was originally built for controlling input from a Fire TV remote but it is now flexible for any keyboard input that works with key codes.
 
+Note: As the `keypress` event is [deprecated](https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event) this library does not support it.
+
 ## Demo
 
 An example and quick start is at [https://github.com/bobinrinder/react-fire-tv-web-app-example](https://github.com/bobinrinder/react-fire-tv-web-app-example)
