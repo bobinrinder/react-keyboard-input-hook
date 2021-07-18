@@ -25,7 +25,7 @@ export default function useKey(
     keyCode: null,
     keyCodeHistory: [],
     code: null,
-    codeHistory: []
+    codeHistory: [],
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function useKey(
       return null;
     }
 
-    const handleKey = e => {
+    const handleKey = (e) => {
       // get key details from event
       const keyCode = e.keyCode;
       const code = e.code || "UnknownKey";
@@ -54,12 +54,12 @@ export default function useKey(
       }
 
       // update state with new key details
-      setState(prevState => {
+      setState((prevState) => {
         return {
           keyCode,
           keyCodeHistory: [...prevState.keyCodeHistory, keyCode],
           code,
-          codeHistory: [...prevState.codeHistory, code]
+          codeHistory: [...prevState.codeHistory, code],
         };
       });
 
@@ -68,7 +68,7 @@ export default function useKey(
         handleKeyCallback({
           keyName: code,
           keyCode,
-          e
+          e,
         });
       }
     };
@@ -83,7 +83,7 @@ export default function useKey(
     keyCode: state.keyCode,
     keyCodeHistory: state.keyCodeHistory,
     keyName: state.code,
-    keyNameHistory: state.codeHistory
+    keyNameHistory: state.codeHistory,
   };
 }
 
@@ -127,22 +127,22 @@ export function useKeyCombo(keyCodes = [], handleKeyCallback = null) {
       if (
         checkIfArrayItemsinArray(keyCodes, [
           ...currentlyPressedKeyCodes,
-          keyCode
+          keyCode,
         ])
       ) {
         handleKeyCallback({ keyCode, keyName, e });
         setCurrentlyPressedKeyCodes([]);
       } else {
-        setCurrentlyPressedKeyCodes(prevState => [...prevState, keyCode]);
+        setCurrentlyPressedKeyCodes((prevState) => [...prevState, keyCode]);
       }
     }
   };
   const handleKeyUp = ({ keyCode }) => {
     const indexOfPressedKeyCode = currentlyPressedKeyCodes.indexOf(keyCode);
     if (indexOfPressedKeyCode > -1) {
-      setCurrentlyPressedKeyCodes(prevState => [
+      setCurrentlyPressedKeyCodes((prevState) => [
         ...prevState.slice(0, indexOfPressedKeyCode),
-        ...prevState.slice(indexOfPressedKeyCode + 1)
+        ...prevState.slice(indexOfPressedKeyCode + 1),
       ]);
     }
   };
